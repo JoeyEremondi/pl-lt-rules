@@ -12,7 +12,8 @@
     <marker>our language</marker>
   </example>
   <example>\lang</example>
-</rule> <!-- English rule, 2022-02-02 -->
+</rule>
+<!-- English rule, 2022-02-02 -->
 <rule id="TYPECHECK" name="Typecheck">
   <pattern>
     <token regexp='yes'>type-?check(er|ers|ing|s|ed)?</token>
