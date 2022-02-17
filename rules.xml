@@ -1,0 +1,498 @@
+<rule id="OUR_LANGUAGE" name="OUR_LANGUAGE">
+  <pattern>
+    <token>our</token>
+    <token>language</token>
+  </pattern>
+  <message>
+    Joey writes
+    <suggestion>our language</suggestion>
+    too much
+  </message>
+  <example correction=''>
+    <marker>our language</marker>
+  </example>
+  <example>\lang</example>
+</rule> <!-- English rule, 2022-02-02 -->
+<rule id="TYPECHECK" name="Typecheck">
+  <pattern>
+    <token regexp='yes'>type-?check(er|ers|ing|s|ed)?</token>
+  </pattern>
+  <message>Use "type check" for consistency</message>
+  <example correction=''>
+    <marker>typecheck</marker>
+    typechecking type-check type-checking type-checks type-checker typechecks typechecker
+  </example>
+  <example>type check</example>
+  <example correction=''>typechecking</example>
+  <example>type checking</example>
+  <example correction=''>type-check</example>
+  <example correction=''>type-checking</example>
+  <example correction=''>type-checks</example>
+  <example correction=''>type-checker</example>
+  <example correction=''>typechecks</example>
+  <example correction=''>typechecker</example>
+</rule><!-- English rule, 2022-02-02 -->
+<rule id="RUNTIME" name="RUNTIME">
+  <pattern>
+    <token>runtime</token>
+  </pattern>
+  <message>Unless you are talking about how long a program takes to run, use "run-time" as an adjective or run time as a noun.</message>
+  <example correction=''>
+    <marker>runtime</marker>
+  </example>
+  <example>run-time or run time</example>
+</rule> <!-- English rule, 2022-02-02 -->
+<rule id="CASTCALCULUS" name="CASTCALCULUS">
+  <pattern>
+    <token>cast</token>
+    <token>calculus</token>
+  </pattern>
+  <message>"cast calculus" should have a hyphen</message>
+  <example correction=''>
+    <marker>cast calculus</marker>
+  </example>
+  <example>cast-calculus</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="NO_CONTRACTIONS" name="No Contractions">
+ <pattern>
+  <token regexp='yes'>'m|'re|'ve|'d|'ll|'t</token>
+ </pattern>
+ <message>Do not use contractions in formal writing</message>
+ <short>No contractions</short>
+ <example correction=''>let<marker>'s</marker></example>
+ <example>let us</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="S_CONTACTION" name="S_CONTACTION">
+ <pattern>
+  <token postag='PRP|VBZ' postag_regexp='yes'>'s</token>
+ </pattern>
+ <message>In formal writing, 's should only be used for possessives, not as a contraction for "is".</message>
+ <short>Don't use 's as a contraction.</short>
+ <example correction=''>That<marker>'s</marker> the problem, so let's look at the car's engine. Let's look at the car's engine. That's the problem with the car's engine.</example>
+ <example>That is the problem, so let us look at the car's engine.</example>
+ <example correction=''>Let's look at the car's engine.</example>
+ <example>Let us look at the car's engine.</example>
+ <example correction=''>That's the problem with the car's engine.</example>
+ <example>That is the problem with the car's engine.</example>
+</rule>
+
+<!-- English rule, 2022-02-16, from CAPRA -->
+<rule id="THIS_AS_SUBJECT" name="This as subject">
+ <pattern>
+  <token inflected='yes' regexp='yes' postag='DT'>this|these</token>
+  <token postag='VB.*' postag_regexp='yes' chunk_re='.*VP.*'></token>
+ </pattern>
+ <message>Be specific: don't use "this" as the subject of a sentence</message>
+ <short>Don't use this as the subject of a sentence</short>
+ <example correction=''><marker>This is</marker> problematic. These are problematic These are problematic</example>
+ <example>The problem is problematic.</example>
+ <example>This problem is problematic.</example>
+ <example correction=''>These are problematic</example>
+ <example>These problems are problematic</example>
+ <example>They are problematic</example>
+ <example>In this section we see the problem</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16, taken from CAPRA guide -->
+<rule id="LONG_LIST_NUMBERS" name="Long List Numbers">
+ <pattern>
+  <token regexp='yes'>firstly|secondly|thirdly</token>
+  <token>,</token>
+ </pattern>
+ <message>Use (1) and (2) instead of firstly, secondly, etc.</message>
+ <short>Don's use firstly, secondly, thirdly</short>
+ <example correction=''>Firstly, this is the problem.</example>
+ <example>(1)</example>
+ <example correction=''>Secondly,</example>
+ <example>(2)</example>
+ <example correction=''>Thirdly,</example>
+ <example>(3)</example>
+</rule>
+
+<!-- English rule, 2022-02-16, taken from the CAPRA guide -->
+<rule id="RUN_TIME_ADJECTIVE" name="Run time adjective">
+ <pattern>
+  <token>run</token>
+  <token>time</token>
+  <token postag='N.*' postag_regexp='yes'></token>
+ </pattern>
+ <message>Use run-time as as a description of a noun.</message>
+ <short>Use run-time for adjective</short>
+ <example correction=''>There was a <marker>run time error</marker>.</example>
+ <example>There was a run-time error.</example>
+ <example>There was an error at run time.</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA style guide -->
+<rule id="RUNTIME_AS_NOUN" name="Run-time as noun">
+ <pattern>
+  <token chunk_re='E-NP.*'>run-time</token>
+ </pattern>
+ <message>Use "run time" for the noun form</message>
+ <short>Noun form is "run time"</short>
+ <example correction=''>There was an error at <marker>run-time</marker> in the program This will cause problems at run-time.</example>
+ <example>There was an error at run time in the program</example>
+ <example>There was a run-time error in the program</example>
+ <example>This is a problem during run-time checks</example>
+ <example correction=''>This will cause problems at run-time.</example>
+ <example>This will cause problems during run-time analysis.</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16, taken from CAPRA guide -->
+<rule id="RUNTIME_SENTENCE_END" name="Run-time sentence end">
+ <pattern>
+  <token postag='SENT_END'>run-time</token>
+ </pattern>
+ <message>Use "run time" for the noun</message>
+ <short>Noun form is "run time"</short>
+ <example correction=''>There was an error at <marker>run-time</marker></example>
+ <example>There was an error at run time</example>
+ <example>There was a run-time error</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="WE_HAVE" name="We have">
+ <pattern>
+  <token>we</token>
+  <token postag='VBP|VBN|VB' postag_regexp='yes'>have</token>
+  <token postag='VBN' postag_regexp='yes' negate_pos='yes'></token>
+ </pattern>
+ <message>Joey uses "we have" too much in his writing</message>
+ <short>Don't say "we have"</short>
+ <example correction=''><marker>We have a</marker> problem.</example>
+ <example>There is a problem.</example>
+ <example>We have seen it.</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA-->
+<rule id="WHICH_MEANS_THAT" name="which means that">
+ <pattern>
+  <token>which</token>
+  <token>means</token>
+  <token>that</token>
+ </pattern>
+ <message>Use "so" instead</message>
+ <short>Use "so" instead</short>
+ <example correction='so'><marker>which means that</marker></example>
+ <example>so</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="ALLOWS_TO" name="Allows to">
+ <pattern>
+  <token inflected='yes'>allow</token>
+  <token chunk_re='B-NP.*'></token>
+  <token min='0' chunk_re='I-NP.*'></token>
+  <token min='0' chunk_re='E-NP.*'></token>
+  <token>to</token>
+ </pattern>
+ <message>Use "lets" instead</message>
+ <short>Use "lets"</short>
+ <example correction=''>This <marker>allows the program to</marker> run</example>
+ <example>This lets the program run</example>
+ <example correction=''>The check allows our gradual language to execute safely.</example>
+ <example>The check lets our gradual language execute safely.</example>
+ <example correction=''>The check allows it to run safely.</example>
+ <example>The check lets it run safely.</example>
+ <example correction=''>These allow the program to run</example>
+ <example>These let the program run</example>
+ <example correction=''>These check allow our gradual language to execute safely.</example>
+ <example>These checks let our gradual language execute safely.</example>
+ <example correction=''>The checks allows them to run safely.</example>
+ <example>The check let them run safely.</example>
+ <example correction=''>This allows all the programs to run</example>
+ <example>This lets all the programs run</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="GIVE_ABILITY_TO" name="Gives ability to">
+ <pattern>
+  <token inflected='yes'>give</token>
+  <token chunk_re='B-NP.*'></token>
+  <token min='0' chunk_re='I-NP.*'></token>
+  <token min='0' chunk_re='E-NP.*'></token>
+<token>the</token>
+<token>ability</token>  
+<token>to</token>
+ </pattern>
+ <message>Use "lets" instead</message>
+ <short>Use "lets"</short>
+ <example correction=''>This gives the program the ability to run</example>
+ <example>This lets the program language run</example>
+ <example correction=''>The check gives our gradual language the ability to execute safely.</example>
+ <example>The check lets our gradual language execute safely.</example>
+ <example correction=''>The check gives it the ability to run safely.</example>
+ <example>The check lets it run safely.</example>
+ <!-- <example correction=''>These give all the programs the ability to run</example> -->
+ <!-- <example>These let all the programs run</example> -->
+ <example correction=''>These give them the ability to run</example>
+ <example>This lets them ruin</example>
+ <example correction=''>These give it the ability to run</example>
+ <example>These let it run</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="IN_ORDER_TO" name="In order to">
+ <pattern>
+  <token>in</token>
+  <token>order</token>
+  <token>to</token>
+ </pattern>
+ <message>Use the simpler "to"</message>
+ <short>Use "to"</short>
+ <example correction=''><marker>in order to</marker></example>
+ <example>to</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="SO_AS_TO" name="So as to">
+ <pattern>
+  <token>so</token>
+  <token>as</token>
+  <token>to</token>
+ </pattern>
+ <message>Use the simpler "to"</message>
+ <short>"to"</short>
+ <example correction=''><marker>so as to</marker></example>
+ <example>to</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="IS_BUILT_ON" name="Is built on">
+ <pattern>
+  <token inflected='yes'>be</token>
+  <token>built</token>
+  <token>on</token>
+ </pattern>
+ <message>Use "builds on" instead of "is built on" when describing systems/languages</message>
+ <short>"builds on"</short>
+ <example correction=''><marker>is built on</marker> are built on was built on were built on</example>
+ <example>builds on</example>
+ <example correction=''>are built on</example>
+ <example>build on</example>
+ <example correction=''>was built on</example>
+ <example>built on</example>
+ <example correction=''>were built on</example>
+ <example>built on</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="HAS_POTENTIAL" name="has potential">
+ <pattern>
+  <token inflected='yes'>have</token>
+  <token>the</token>
+  <token>potential</token>
+  <token>to</token>
+ </pattern>
+ <message>Use the simpler "could"</message>
+ <short>"could"</short>
+ <example correction=''><marker>has the potential to</marker> have the potential to</example>
+ <example>could</example>
+ <example correction=''>have the potential to</example>
+ <example>could</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="TRADEOFF" name="tradeoff">
+ <pattern>
+  <token inflected='yes'>tradeoff</token>
+ </pattern>
+ <message>use "trade-off" for consistency</message>
+ <short>"trade-off"</short>
+ <example correction=''><marker>tradeoff</marker> tradeoffs</example>
+ <example>trade-off</example>
+ <example correction=''>tradeoffs</example>
+ <example>trade-offs</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="SUFFICIENT_AMOUNT" name="sufficient amount">
+ <pattern>
+  <token>a</token>
+  <token>sufficient</token>
+  <token>amount</token>
+  <token>of</token>
+ </pattern>
+ <message>Use the simpler "enough"</message>
+ <short>"enough"</short>
+ <example correction=''><marker>a sufficient amount of</marker></example>
+ <example>enough</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="UTILIZE" name="utilize">
+ <pattern>
+  <token inflected='yes'>utilize</token>
+ </pattern>
+ <message>Use the simpler "use"</message>
+ <short>"use"</short>
+ <example correction=''><marker>utilize</marker> utilized utilizes</example>
+ <example>use</example>
+ <example correction=''>utilized</example>
+ <example>used</example>
+ <example correction=''>utilizes</example>
+ <example>uses</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="MAKE_USE_OF" name="make use of">
+ <pattern>
+  <token inflected='yes'>make</token>
+  <token>use</token>
+  <token>of</token>
+ </pattern>
+ <message>Use the simpler "use"</message>
+ <short>"use"</short>
+ <example correction=''><marker>make use of</marker> made use of makes use of making use of</example>
+ <example>use</example>
+ <example correction=''>made use of</example>
+ <example>used</example>
+ <example correction=''>makes use of</example>
+ <example>uses</example>
+ <example correction=''>making use of</example>
+ <example>using</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="NOTE_THAT" name="Note that">
+ <pattern>
+  <token regexp='yes'>note|notice</token>
+  <token>that</token>
+ </pattern>
+ <message>"Note that" or "notice that" adds nothing</message>
+ <short>Don't say "note that"</short>
+ <example correction=''><marker>note that</marker> this happens notice that this happens</example>
+ <example>this happens</example>
+ <example correction=''>notice that this happens</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="SEE_HOW" name="see how">
+ <pattern>
+  <token>see</token>
+  <token>how</token>
+ </pattern>
+ <message>"see how" is redundant and adds nothing</message>
+ <short>Don't use "see how"</short>
+ <example correction=''><marker>see how</marker> it happens</example>
+ <example>it happens</example>
+</rule>
+
+<!-- English rule, 2022-02-16, CAPRA -->
+<rule id="IT_IS_WORTH_NOTING_THAT" name="it is worth noting that">
+ <pattern>
+  <token>it</token>
+  <token>is</token>
+  <token>worth</token>
+  <token>noting</token>
+  <token>that</token>
+ </pattern>
+ <message>"it is worth nothing that" takes up your valuable space budget and adds nothing</message>
+ <short>redundant</short>
+ <example correction=''><marker>it is worth noting that</marker> this happens</example>
+ <example>this happens</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16 -->
+<rule id="JUDGEMENT" name="judgement">
+ <pattern>
+  <token inflected='yes' regexp='yes'>judgement(al)?</token>
+ </pattern>
+ <message>For consistency, use "judgment"</message>
+ <short>"judgment"</short>
+ <example correction=''><marker>judgement</marker> judgements judgemental</example>
+ <example>judgment</example>
+ <example correction=''>judgements</example>
+ <example>judgments</example>
+ <example correction=''>judgemental</example>
+ <example>judgmental</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="NO_GENDERED_PRONOUNS" name="no gendered pronouns">
+ <pattern>
+  <token inflected='yes' regexp='yes'>he|she|his|her</token>
+ </pattern>
+ <message>There are very few cases where gendered pronouns are appropriate in a formal paper. You can never go wrong with "they"</message>
+ <short>"they"</short>
+ <example correction=''><marker>He</marker> proves this She proves this It is her proof It is his proof The proof is hers The proof is his</example>
+ <example>They prove this</example>
+ <example correction=''>She proves this</example>
+ <example>They prove this</example>
+ <example correction=''>It is her proof</example>
+ <example>It is their proof</example>
+ <example correction=''>It is his proof</example>
+ <example>It is their proof</example>
+ <example correction=''>The proof is hers</example>
+ <example>The proof is theirs</example>
+ <example correction=''>The proof is his</example>
+ <example>The proof is theirs</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="WE_CAN_SEE_THAT" name="we can see that">
+ <pattern>
+  <token>we</token>
+  <token min='0'>can</token>
+  <token>see</token>
+  <token>that</token>
+ </pattern>
+ <message>"we can see that" adds nothing and eats your precious page budget</message>
+ <short>redundant</short>
+ <example correction=''><marker>we can see that</marker> this happens we see that this happens</example>
+ <example>this happens</example>
+ <example correction=''>we see that this happens</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="CLEARLY_OBVIOUSLY" name="clearly obviously">
+ <pattern>
+  <token regexp='yes'>clearly|obviously</token>
+ </pattern>
+ <message>Just eliminate these words, don't assume what is easy to the reader</message>
+ <short>redundant</short>
+ <example correction=''><marker>Clearly</marker> this is true Obviously this is true</example>
+ <example>this is true</example>
+ <example correction=''>Obviously this is true</example>
+</rule>
+
+
+<!-- English rule, 2022-02-16 -->
+<rule id="EASY_TO_SEE" name="easy to see">
+ <pattern>
+  <token>it</token>
+  <token>is</token>
+  <token>easy</token>
+  <token>to</token>
+  <token>see</token>
+ </pattern>
+ <message>Don<suggestion>t assume what</suggestion>s easy to the reader</message>
+ <short>redundant</short>
+ <example correction=''><marker>it is easy to see</marker> that this is true it is easy to see this is true</example>
+ <example>this is true</example>
+ <example correction=''>it is easy to see this is true</example>
+ <example>this is true</example>
+</rule>
+
+<!-- English rule, 2022-02-16 -->
+<rule id="SIMPLY" name="simply">
+ <pattern>
+  <token>simply</token>
+  <token negate='yes'>typed</token>
+ </pattern>
+ <message>You should only use simply to refer to the STLC</message>
+ <short>redundant</short>
+ <example correction=''>the result is <marker>simply three</marker></example>
+ <example>the result is three</example>
+ <example>this is the simply typed lambda calculus</example>
+</rule>
