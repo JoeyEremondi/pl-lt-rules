@@ -1,5 +1,7 @@
 # -*- mode: Org; eval: (auto-fill-mode 0) -*- #
 # -*- mode: Org; eval: (org-poly-mode 0) -*- #
+# -*- mode: Org; eval: (setq org-html-xml-declaration (("html" . "")("php" . "<?php echo \"<?xml version=\\\"1.0\\\" encoding=\\\"%s\\\" ?>\"; ?>"))) -*- #
+
 
 #+TITLE: pl-lt-rules
 #+AUTHOR: Joey Eremondi
@@ -14,7 +16,7 @@ This is an incomplete, highly opinionated list of rules I use in
 LanguageTool for checking my papers. Feel free to use it, modify it,
 etc. The rules are geared towards programming-language papers.
 
-The rules are written here as a literate org-mode file, but you're welcome to work with the raw XML, which is also included in this repo.
+The rules are written here as a literate org-mode file, but you're welcome to work with the raw XML :TANGLE RULES.XML, which is also included in this repo.
 
 Many of the rules are taken from
 [[https://capra.cs.cornell.edu/styleguide/#runtime][this guide]]
@@ -28,7 +30,7 @@ Pull requests and bug reports are always welcome!
    lets you modify your grammar rules. You'll need to configure your LTex to use this server.
 
 2. Add the rules to your grammar. Add a line that looks something like
-   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml=:
+   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml :tangle rules.xml=:
 
    #+begin_example
        <!ENTITY UserRules SYSTEM "file:///path/to/your/rules">
@@ -39,7 +41,7 @@ Pull requests and bug reports are always welcome!
    lets you modify your grammar rules.
 
 2. Add the rules to your grammar. Add a line that looks something like
-   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml=:
+   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml :tangle rules.xml=:
 
    #+begin_example
        <!ENTITY UserRules SYSTEM "file:///path/to/your/rules">
@@ -61,7 +63,7 @@ Pull requests and bug reports are always welcome!
 
 *** Avoid contractions
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="NO_CONTRACTIONS" name="No Contractions">
  <pattern>
@@ -77,7 +79,7 @@ Pull requests and bug reports are always welcome!
 
 **** Have to handle 's specially since it's also the possessive
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="S_CONTACTION" name="S_CONTACTION">
  <pattern>
@@ -100,7 +102,7 @@ Pull requests and bug reports are always welcome!
 This is probably the most controversial rule. Even if there's a single author, I refer to them as "they" instead of "he" or "she". Realistically,
 the only place I can imagine using "he" or "she" in a paper is when directly quoting someone else.
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="NO_GENDERED_PRONOUNS" name="no gendered pronouns">
  <pattern>
@@ -126,7 +128,7 @@ the only place I can imagine using "he" or "she" in a paper is when directly quo
 
 *** "We have"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="WE_HAVE" name="We have">
  <pattern>
@@ -146,7 +148,7 @@ the only place I can imagine using "he" or "she" in a paper is when directly quo
 
 *** Our Language
 I always have a macro ~\lang~ that I use to refer to the language I'm developing, so I shouldn't say "our language" a bunch
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <rule id="OUR_LANGUAGE" name="OUR_LANGUAGE">
   <pattern>
     <token>our</token>
@@ -171,7 +173,7 @@ I always have a macro ~\lang~ that I use to refer to the language I'm developing
 *** Runtime vs run-time vs run time
 
 **** I don't do performance, so I never need to use "runtime"
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-02 -->
 <rule id="RUNTIME" name="RUNTIME">
   <pattern>
@@ -182,13 +184,14 @@ I always have a macro ~\lang~ that I use to refer to the language I'm developing
     <marker>runtime</marker>
   </example>
   <example>run-time or run time</example>
-</rule> #+end_src
+</rule>
+#+end_src
 
 
 
 **** Don't use "run time" as an adjective
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, taken from the CAPRA guide -->
 <rule id="RUN_TIME_ADJECTIVE" name="Run time adjective">
  <pattern>
@@ -207,7 +210,7 @@ I always have a macro ~\lang~ that I use to refer to the language I'm developing
 
 **** Don't use "run-time" as a noun
 We need a couple rules to catch all these cases, since the chunker is finicky
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA style guide -->
 <rule id="RUNTIME_AS_NOUN" name="Run-time as noun">
  <pattern>
@@ -227,7 +230,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 #+end_src
 
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, taken from CAPRA guide -->
 <rule id="RUNTIME_SENTENCE_END" name="Run-time sentence end">
  <pattern>
@@ -246,7 +249,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** Type check vs typecheck vs type-check
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-02 -->
 <rule id="TYPECHECK" name="Typecheck">
   <pattern>
@@ -266,11 +269,12 @@ We need a couple rules to catch all these cases, since the chunker is finicky
   <example correction=''>type-checker</example>
   <example correction=''>typechecks</example>
   <example correction=''>typechecker</example>
-</rule>#+end_src
+</rule>
+#+end_src
 
 *** Cast-calculus vs cast calculus
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-02 -->
 <rule id="CASTCALCULUS" name="CASTCALCULUS">
   <pattern>
@@ -288,7 +292,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Tradeoff" vs "trade-off", choose one for consistency
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="TRADEOFF" name="tradeoff">
  <pattern>
@@ -306,7 +310,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** Use "Judgment" instead of "Judgement"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="JUDGEMENT" name="judgement">
  <pattern>
@@ -328,7 +332,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "This" as the subject of a sentence
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, from CAPRA -->
 <rule id="THIS_AS_SUBJECT" name="This as subject">
  <pattern>
@@ -352,7 +356,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 ** Redundant phrases
 *** "We can see that" can be omitted
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="WE_CAN_SEE_THAT" name="we can see that">
  <pattern>
@@ -372,7 +376,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** Don't use "clearly" or "obviously"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="CLEARLY_OBVIOUSLY" name="clearly obviously">
  <pattern>
@@ -390,7 +394,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** Don't say something is "easy to see"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="EASY_TO_SEE" name="easy to see">
  <pattern>
@@ -412,7 +416,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** Only use "simply" when referring to the STLC
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="SIMPLY" name="simply">
  <pattern>
@@ -430,7 +434,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Note that" can be omitted
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="NOTE_THAT" name="Note that">
  <pattern>
@@ -448,7 +452,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "See how" can be omitted
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="SEE_HOW" name="see how">
  <pattern>
@@ -465,7 +469,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "It is worth noting that" can be omitted
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="IT_IS_WORTH_NOTING_THAT" name="it is worth noting that">
  <pattern>
@@ -487,7 +491,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 ** Simpler writing
 *** Long lists of written-out numbers
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, taken from CAPRA guide -->
 <rule id="LONG_LIST_NUMBERS" name="Long List Numbers">
  <pattern>
@@ -508,7 +512,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Allows X to " should be "lets X"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="ALLOWS_TO" name="Allows to">
  <pattern>
@@ -540,7 +544,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Gives X the ability to" should be "Lets X"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16 -->
 <rule id="GIVE_ABILITY_TO" name="Gives ability to">
  <pattern>
@@ -572,7 +576,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "In order to" should be "to"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="IN_ORDER_TO" name="In order to">
  <pattern>
@@ -590,7 +594,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "So as to" should be "to"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="SO_AS_TO" name="So as to">
  <pattern>
@@ -608,7 +612,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Is built on" should be "builds on"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="IS_BUILT_ON" name="Is built on">
  <pattern>
@@ -633,7 +637,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Has potential" can be "could"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="HAS_POTENTIAL" name="has potential">
  <pattern>
@@ -654,7 +658,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Sufficient amount" should be "enough"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="SUFFICIENT_AMOUNT" name="sufficient amount">
  <pattern>
@@ -674,7 +678,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Utilize" should be "use"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="UTILIZE" name="utilize">
  <pattern>
@@ -694,7 +698,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Make use of" should be "Use"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA -->
 <rule id="MAKE_USE_OF" name="make use of">
  <pattern>
@@ -719,7 +723,7 @@ We need a couple rules to catch all these cases, since the chunker is finicky
 
 *** "Which means that"
 
-#+begin_src xml
+#+begin_src xml :tangle rules.xml
 <!-- English rule, 2022-02-16, CAPRA-->
 <rule id="WHICH_MEANS_THAT" name="which means that">
  <pattern>
