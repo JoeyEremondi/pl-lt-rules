@@ -1,0 +1,59 @@
+* pl-lt-rules
+  :PROPERTIES:
+  :CUSTOM_ID: pl-lt-rules
+  :END:
+Rules for writing academic papers and checking them using
+[[https://github.com/valentjn/ltex-ls][LTex language server]] and
+[[https://github.com/languagetool-org/languagetool][LanguageTool]]
+
+This is an incomplete, highly opinionated list of rules I use in
+LanguageTool for checking my papers. Feel free to use it, modify it,
+etc. The rules are geared towards programming-language papers.
+
+Many of the rules are taken from
+[[https://capra.cs.cornell.edu/styleguide/#runtime][this guide]]
+
+Pull requests and bug reports are always welcome!
+
+** Using
+   :PROPERTIES:
+   :CUSTOM_ID: using
+   :END:
+1. Run LanguageTool as a server, following
+   [[https://dev.languagetool.org/http-server.html][this guide]]. This
+   lets you modify your grammar rules.
+
+2. Add the rules to your grammar. Add a line that looks something like
+   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml=:
+
+   #+begin_example
+       <!ENTITY UserRules SYSTEM "file:///path/to/your/rules">
+   #+end_example
+
+   Then in some enabled rule-set, add =&UserRules;=. For example, I
+   have:
+
+   #+begin_example
+   <rules lang="en-GB" xsi:noNamespaceSchemaLocation="../../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+       <category id="SEMANTICS" name="Semantics" type="inconsistency">
+
+   <!-- English rule, 2022-02-01 -->
+           &UserRules;
+   #+end_example
+
+   The full guide is
+   [[https://dev.languagetool.org/tips-and-tricks][here]]
+
+3. Restart the LanguageTool server each time you change the rules.
+
+** Guides/toops for making rules:
+   :PROPERTIES:
+   :CUSTOM_ID: guidestoops-for-making-rules
+   :END:
+- [[https://community.languagetool.org/ruleEditor2/][LanguageTool Rule
+  Creator]]
+- [[https://dev.languagetool.org/development-overview][LanguageTool
+  rules overview]]
+- [[https://dev.languagetool.org/using-chunks][Chunking in
+  LanguageTool]]
