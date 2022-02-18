@@ -1,6 +1,5 @@
 # -*- mode: Org; eval: (auto-fill-mode 0) -*- #
-# -*- mode: Org; eval: (org-poly-mode 0) -*- #
-# -*- mode: Org; eval: (setq org-html-xml-declaration (("html" . "")("php" . "<?php echo \"<?xml version=\\\"1.0\\\" encoding=\\\"%s\\\" ?>\"; ?>"))) -*- #
+# -*- mode: Org; eval: (poly-org-mode 0) -*- #
 
 
 #+TITLE: pl-lt-rules
@@ -16,36 +15,45 @@ This is an incomplete, highly opinionated list of rules I use in
 LanguageTool for checking my papers. Feel free to use it, modify it,
 etc. The rules are geared towards programming-language papers.
 
-The rules are written here as a literate org-mode file, but you're welcome to work with the raw XML :TANGLE RULES.XML, which is also included in this repo.
+The rules are written here as a literate org-mode file, but you're welcome to work with the raw XML file ~rules.xml~, which is also included in this repo.
 
 Many of the rules are taken from
-[[https://capra.cs.cornell.edu/styleguide/#runtime][this guide]]
+[[https://capra.cs.cornell.edu/styleguide/#runtime][The CAPRA Style Guide.]]
 
 Pull requests and bug reports are always welcome!
 
 * Using
 
-1. Run LanguageTool as a server, following
-   [[https://dev.languagetool.org/http-server.html][this guide]]. This
-   lets you modify your grammar rules. You'll need to configure your LTex to use this server.
-
-2. Add the rules to your grammar. Add a line that looks something like
-   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml :tangle rules.xml=:
-
-   #+begin_example
-       <!ENTITY UserRules SYSTEM "file:///path/to/your/rules">
-   #+end_example
 
 1. Run LanguageTool as a server, following
    [[https://dev.languagetool.org/http-server.html][this guide]]. This
    lets you modify your grammar rules.
 
 2. Add the rules to your grammar. Add a line that looks something like
-   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml :tangle rules.xml=:
+   this under =<!DOCTYPE rules [= in LanguageTool's =grammar.xml=:
 
    #+begin_example
-       <!ENTITY UserRules SYSTEM "file:///path/to/your/rules">
+       <!ENTITY UserRules SYSTEM "file:///path/to/your/rules.xml">
    #+end_example
+
+   Then in some enabled rule-set, add =&UserRules;=. For example, I
+   have:
+
+   #+begin_example
+   <rules lang="en-GB" xsi:noNamespaceSchemaLocation="../../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+       <category id="SEMANTICS" name="Semantics" type="inconsistency">
+
+   <!-- English rule, 2022-02-01 -->
+           &UserRules;
+   #+end_example
+
+   The full guide is
+   [[https://dev.languagetool.org/tips-and-tricks][here]]
+
+3. Configure LTex to use your local server. Make sure to restart the LanguageTool server each time you change the rules.
+
+
 
 
 * Guides/Tools for making rules
