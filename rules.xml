@@ -1,4 +1,3 @@
-
 <!-- [[file:README.org::*Avoid contractions][Avoid contractions:1]] -->
 <!-- English rule, 2022-02-16 -->
 <rule id="NO_CONTRACTIONS" name="No Contractions">
@@ -216,6 +215,37 @@
  <example>judgmental</example>
 </rule>
 <!-- Use "Judgment" instead of "Judgement":1 ends here -->
+
+<!-- [[file:README.org::*Don't use a hyphen in either][Don't use a hyphen in either:1]] -->
+<!-- English rule, 2022-02-23 -->
+<rule id="DEPENDENT_TYPE" name="Dependent type">
+ <pattern>
+  <token regexp='yes'>dependent(ly)?-type[sd]?</token>
+ </pattern>
+ <message>No hyphen in  "dependent type"</message>
+ <short>No hyphen</short>
+ <example correction=''>The constructor builds a <marker>dependent-type</marker> The language supports dependent-types This is hard in dependently-typed programming languages</example>
+ <example>The constructor builds a dependent type</example>
+ <example correction=''>The language supports dependent-types</example>
+ <example>The language supports dependent types</example>
+ <example correction=''>This is hard in dependently-typed programming languages</example>
+ <example>This is hard in dependently typed programming languages</example>
+</rule>
+<!-- Don't use a hyphen in either:1 ends here -->
+
+<!-- [[file:README.org::*Related: don't use "dependent language". Use "dependently-typed language".][Related: don't use "dependent language". Use "dependently-typed language".:1]] -->
+<!-- English rule, 2022-02-23 -->
+<rule id="DEPENDENT_LANGUAGE" name="Dependent language">
+ <pattern>
+  <token>dependent</token>
+  <token>language</token>
+ </pattern>
+ <message>Use the full "dependently typed"</message>
+ <short>"dependently typed language"</short>
+ <example correction=''>This is a <marker>dependent language</marker></example>
+ <example>This is a dependently typed language</example>
+</rule>
+<!-- Related: don't use "dependent language". Use "dependently-typed language".:1 ends here -->
 
 <!-- [[file:README.org::*"This" as the subject of a sentence]["This" as the subject of a sentence:1]] -->
 <!-- English rule, 2022-02-16, from CAPRA -->
@@ -560,3 +590,53 @@
  <example>so</example>
 </rule>
 <!-- "Which means that":1 ends here -->
+
+<!-- [[file:README.org::*"Desiderata"]["Desiderata":1]] -->
+<!-- English rule, 2022-02-23 -->
+<rule id="DESIDERATA" name="Desiderata">
+ <pattern>
+  <token inflected='yes'>desideratum</token>
+ </pattern>
+ <message>Use "goals", "criteria" or something similar</message>
+ <short>Overused</short>
+ <example correction=''><marker>desideratum</marker> desiderata</example>
+ <example>goal</example>
+ <example correction=''>desiderata</example>
+ <example>goals</example>
+</rule>
+<!-- "Desiderata":1 ends here -->
+
+<!-- [[file:README.org::*"There is/are"]["There is/are":1]] -->
+<!-- English rule, 2022-02-23 -->
+<rule id="THERE_IS_ARE" name="There is are">
+ <pattern>
+  <token>there</token>
+  <token regexp='yes'>is|are|were</token>
+ </pattern>
+ <message>Might be correct, but often it's stronger to use a more direct verb.</message>
+ <short>Use a direct verb?</short>
+ <example correction=''><marker>There is</marker> a cat There are some cats</example>
+ <example>A cat is sitting there</example>
+ <example correction=''>There are some cats</example>
+ <example>Some cats are sitting there</example>
+</rule>
+<!-- "There is/are":1 ends here -->
+
+<!-- [[file:README.org::*Will][Will:1]] -->
+<!-- English rule, 2022-02-23 -->
+<rule id="WILL_FUTURE_TENSE" name="Will (future tense)">
+ <pattern>
+  <token postag='MD'>will</token>
+ </pattern>
+ <message>In academic writing, you very seldom want the future tense.</message>
+ <short>Use present tense</short>
+ <example correction=''>The term <marker>will</marker> reduce It will be a problem It will be a problem Will the term reduce?</example>
+ <example>The term reduces</example>
+ <example>I have a strong will.</example>
+ <example>I tried to will them to arrive.</example>
+ <example correction=''>It will be a problem</example>
+ <example>It is a problem</example>
+ <example correction=''>Will the term reduce?</example>
+ <example>Does the term reduce?</example>
+</rule>
+<!-- Will:1 ends here -->
