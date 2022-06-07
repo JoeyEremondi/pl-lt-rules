@@ -53,7 +53,7 @@ sed -i -e "s|home/username|$HOME|" langtools.patch
 patch -p1 $PATH_TO_GRAMMAR langtools.patch
 #+end_example
 
-You'll need to first set =PATH_TO_GRAMMAR= to something like =$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/rules/en/grammar.xml)= on macOS; some other path on linux.
+You'll need to first set =PATH_TO_GRAMMAR= to something like =$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/rules/en/grammar.xml)= on macOS, or =/usr/share/languagetool/org/languagetool/rules/en/grammar.xml= on Linux.
 
 This will automatically install the necessary lines into the right files, and LanguageTool will load the rules from =$HOME/.language-tool-rules.xml= for all English language grammars.
 Install =rules.xml= to that path.
@@ -65,7 +65,9 @@ ln -sf ~/.aspell.en.pws $PATH_TO_DICTIONARY
 #+end_example
 
 On macOS, =PATH_TO_DICTIONARY= for all English language dictionaries is
-=$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/resource/en/hunspell/spelling_custom.txt)=
+=$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/resource/en/hunspell/spelling_custom.txt)=.
+On linux, try
+=$(ls /usr/share/languagetool/org/languagetool/resource/en/hunspell/spelling_custom.txt)=.
 
 This will load your =aspell= dictionary as a custom dictionary automatically.
 
