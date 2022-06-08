@@ -21,6 +21,57 @@ Many of the rules are taken from
 [[https://capra.cs.cornell.edu/styleguide/#runtime][The CAPRA Style Guide.]]
 
 Pull requests and bug reports are always welcome!
+* Easy Install
+Download the following patch to =langtools.patch=.
+#+begin_example
+--- /tmp/b	2022-06-06 16:37:42.000000000 -0700
++++ /tmp/a	2022-06-06 17:00:59.000000000 -0700
+@@ -29,6 +29,7 @@
+ -->
+
+ <!DOCTYPE rules [
++    <!ENTITY UserRules SYSTEM "file:///home/username/.language-tool-rules.xml">
+     <!ENTITY apostrophe "['’`´‘ʻ]">
+     <!ENTITY quote '["“”„]'>
+     <!ENTITY nbsp  "&#x00A0;"> <!-- no-break space -->
+@@ -598,6 +599,10 @@
+     </phrase>
+   </phrases>
+
++  <category id="CUSTOM_USER_RULES" name="Custom User Rules" default="on">
++    &UserRules;
++  </category>
++
+     <!--
+     <category id="APRIL" name="April 1st">
+         <rule id="APRIL_1ST" name="good advice">
+#+end_example
+
+Run the following commands
+#+begin_example
+sed -i -e "s|home/username|$HOME|" langtools.patch
+patch -p1 $PATH_TO_GRAMMAR langtools.patch
+#+end_example
+
+You'll need to first set =PATH_TO_GRAMMAR= to something like =$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/rules/en/grammar.xml)= on macOS, or =/usr/share/languagetool/org/languagetool/rules/en/grammar.xml= on Linux.
+
+This will automatically install the necessary lines into the right files, and LanguageTool will load the rules from =$HOME/.language-tool-rules.xml= for all English language grammars.
+Install =rules.xml= to that path.
+
+If you want to also install your own personal dictionary, you can use
+
+#+begin_example
+ln -sf ~/.aspell.en.pws $PATH_TO_DICTIONARY
+#+end_example
+
+On macOS, =PATH_TO_DICTIONARY= for all English language dictionaries is
+=$(ls /usr/local/Cellar/languagetool/*/libexec/org/languagetool/resource/en/hunspell/spelling_custom.txt)=.
+On linux, try
+=$(ls /usr/share/languagetool/org/languagetool/resource/en/hunspell/spelling_custom.txt)=.
+
+This will load your =aspell= dictionary as a custom dictionary automatically.
+
+
 
 * Using
 
@@ -52,9 +103,6 @@ Pull requests and bug reports are always welcome!
    [[https://dev.languagetool.org/tips-and-tricks][here]]
 
 3. Configure LTex to use your local server. Make sure to restart the LanguageTool server each time you change the rules.
-
-
-
 
 * Guides/Tools for making rules
 - [[https://community.languagetool.org/ruleEditor2/][LanguageTool Rule
