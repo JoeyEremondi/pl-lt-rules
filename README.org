@@ -1,1 +1,1 @@
-Migrated to [https://codeberg.org/JoeyEremondi/pl-lt-rules](https://codeberg.org/JoeyEremondi/pl-lt-rules)
+Migrated to https://codeberg.org/JoeyEremondi/pl-lt-rules
